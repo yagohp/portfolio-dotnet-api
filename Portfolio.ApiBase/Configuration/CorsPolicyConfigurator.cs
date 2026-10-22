@@ -110,7 +110,6 @@ public static partial class CorsPolicyConfigurator
         else
         {
             LogNoOriginsConfigured(logger);
-            builder.AllowAnyOrigin();
         }
 
         // 2. HTTP METHODS

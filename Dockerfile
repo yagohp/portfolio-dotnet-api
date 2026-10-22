@@ -7,6 +7,8 @@ COPY ["Portfolio.Api/Portfolio.Api.csproj", "Portfolio.Api/"]
 COPY ["Portfolio.ApiBase/Portfolio.ApiBase.csproj", "Portfolio.ApiBase/"]
 COPY ["Portfolio.Aws/Portfolio.Aws.csproj", "Portfolio.Aws/"]
 COPY ["Portfolio.Domain/Portfolio.Domain.csproj", "Portfolio.Domain/"]
+COPY ["Directory.Packages.props", "."]
+COPY ["Portfolio.slnx", "."]
 
 RUN dotnet restore "Portfolio.Api/Portfolio.Api.csproj"
 
@@ -28,11 +30,14 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 
 WORKDIR /app
 
-COPY --from=build /app/publish .
+USER app
+
+COPY --from=build --chown=app:app /app/publish .
 
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
-ENV ASPNETCORE_URLS=http://0.0.0.0:5000
-
 
 EXPOSE 5000
+EXPOSE 5001
+
+
 ENTRYPOINT ["dotnet", "Portfolio.Api.dll"]
