@@ -1,4 +1,6 @@
 <Solution>
-  <Project Path="Portfolio.ApiBase/Portfolio.ApiBase.csproj" />
-  <Project Path="Portfolio.Domain/Portfolio.Domain.csproj" />
+  <Project Path="Portfolio.UnitTests/Portfolio.UnitTests.csproj" />
+  <Project Path="src/Portfolio.Api/Portfolio.Api.csproj" />
+  <Project Path="src/Portfolio.ApiBase/Portfolio.ApiBase.csproj" />
+  <Project Path="src/Portfolio.Domain/Portfolio.Domain.csproj" />
 </Solution>

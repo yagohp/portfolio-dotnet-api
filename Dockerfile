@@ -3,19 +3,18 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 # Copia os .csproj primeiro (aproveita cache do Docker)
-COPY ["Portfolio.Api/Portfolio.Api.csproj", "Portfolio.Api/"]
-COPY ["Portfolio.ApiBase/Portfolio.ApiBase.csproj", "Portfolio.ApiBase/"]
-COPY ["Portfolio.Aws/Portfolio.Aws.csproj", "Portfolio.Aws/"]
-COPY ["Portfolio.Domain/Portfolio.Domain.csproj", "Portfolio.Domain/"]
+COPY ["src/Portfolio.Api/Portfolio.Api.csproj", "src/Portfolio.Api/"]
+COPY ["src/Portfolio.ApiBase/Portfolio.ApiBase.csproj", "src/Portfolio.ApiBase/"]
+COPY ["src/Portfolio.Domain/Portfolio.Domain.csproj", "src/Portfolio.Domain/"]
 COPY ["Directory.Packages.props", "."]
 COPY ["Portfolio.slnx", "."]
 
-RUN dotnet restore "Portfolio.Api/Portfolio.Api.csproj"
+RUN dotnet restore "src/Portfolio.Api/Portfolio.Api.csproj"
 
 # Copia o resto do código e publica
 COPY . .
 
-WORKDIR /src/Portfolio.Api
+WORKDIR /src/src/Portfolio.Api
 RUN dotnet publish "Portfolio.Api.csproj" \
     -c Release \
     -r linux-x64 \

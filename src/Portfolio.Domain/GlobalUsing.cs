@@ -1,0 +1,1 @@
+global using Portfolio.Domain.Entities;
